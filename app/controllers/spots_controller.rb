@@ -10,7 +10,7 @@ class SpotsController < ApplicationController
     @spot.user_id = current_user.id # ユーザーと紐づける
 
     if @spot.save
-      redirect_to spots_path, notice: '投稿が保存されました'
+      redirect_to spot_path(@spot), notice: '投稿が保存されました'
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,6 +22,7 @@ class SpotsController < ApplicationController
   end
 
   def show
+    @spot = Spot.find(params[:id])
   end
 
   def edit
@@ -32,7 +33,7 @@ class SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:title, :body)
+    params.require(:spot).permit(:title, :body, :image)
   end
 
 end

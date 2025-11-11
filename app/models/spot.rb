@@ -1,6 +1,7 @@
 class Spot < ApplicationRecord
-  belongs_to :user_signed_in
+  belongs_to :user
   validates :title, presence: true
+  has_one_attached :image
 
   def get_image
     unless image.attached?

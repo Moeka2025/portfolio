@@ -3,7 +3,7 @@
 <% @spot_images.each do |spot_image| %>
   <div>
     <%= image_tag spot_image.get_image %>
-    <p>名前:<%= spot_image.place_name %></p>
+    <p>名前:<%= spot_image.shop_name %></p>
     <p>説明:<%= spot_image.caption %></p>
   </div>
 <% end %>

@@ -1,2 +1,8 @@
-<h1>Spots#show</h1>
-<p>Find me in app/views/spots/show.html.erb</p>
+<h1>投稿されたもの</h1>
+
+  <div>
+    <%= image_tag @spot.image.variant(resize_to_limit: [300, 300]) if @spot.image.attached? %>
+    <p>タイトル: <%= @spot.shop_name %></p>
+    <p>説明: <%= @spot.body %></p>
+    <%= @spot.created_at.strftime('%Y/%m/%d') %>
+  </div>
