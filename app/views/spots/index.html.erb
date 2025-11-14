@@ -1,9 +1,21 @@
 <h1>投稿一覧</h1>
 
-<% @spot_images.each do |spot_image| %>
-  <div>
-    <%= image_tag spot_image.get_image %>
-    <p>名前:<%= spot_image.shop_name %></p>
-    <p>説明:<%= spot_image.caption %></p>
+<% @spots.each do |spot| %>
+  <div class="spot-card">
+    <p><strong>タイトル:</strong> <%= spot.title %></p>
+    <p><strong>説明:</strong> <%= spot.body %></p>
+    <% if spot.image.attached? %>
+      <%= image_tag spot.image.variant(resize_to_limit: [300, 300]) if spot.image.attached? %>
+    <% else %>
+      <%= image_tag 'いらすとや_no_image_jpg', size: "300x300" %>
+    <% end %>
+
+  <% if spot.user == current_user %>
+    <div class="spot-image">
+      <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
+    </div>
+  <% end %>
+
   </div>
+  <hr> <!-- 投稿の間に線を入れる -->
 <% end %>
