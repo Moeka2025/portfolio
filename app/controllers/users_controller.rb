@@ -6,13 +6,6 @@ class UsersController < ApplicationController
     @spots = @user.spots.order(created_at: :desc)
   end
 
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    reset_session
-    redirect_to root_path, notice: "退会しました"
-  end
-
   private
 
   def user_params

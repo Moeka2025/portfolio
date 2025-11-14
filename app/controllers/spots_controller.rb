@@ -11,7 +11,7 @@ class SpotsController < ApplicationController
     @spot = Spot.new(spot_params)
     @spot.user_id = current_user.id # ユーザーと紐づける
     if @spot.save
-      redirect_to spot_path(@spot), notice: '投稿が保存されました'
+      redirect_to spot_path(@spot), notice: '投稿が保存されました。'
     else
       render :new, status: :unprocessable_entity
     end

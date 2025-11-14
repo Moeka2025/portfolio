@@ -1,16 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def after_update_path_for(resource)
-    flash[:notice] = "プロフィールを更新しました"
-    mypage_path
-  end
-
-  def after_sign_out_path_for(resource_or_scope)
-    flash[:notice] = "退会しました"
-    new_user_registration_path
-  end
-
   protected
 
   def configure_permitted_parameters
