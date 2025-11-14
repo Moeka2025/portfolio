@@ -12,7 +12,7 @@
 
   <body>
     <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div?>
+      <div class="notice"><%= flash[:notice] %></div>
     <% end %>
 
     <% if flash[:alert] %>
@@ -21,9 +21,10 @@
 
     <header>
       <nav>
-        <%= link_to "トップ", root_path %>
-
         <% if user_signed_in? %>
+          <li>
+            <%= link_to "Myページ", root_path %>
+          </li>
           <li>
             <%= link_to "投稿フォーム", new_spot_path %>
           </li>
