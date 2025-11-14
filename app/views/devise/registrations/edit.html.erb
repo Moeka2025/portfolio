@@ -4,7 +4,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="form-group">
-    <%= f.label :name, "氏名" %>
+    <%= f.label :name, "氏名" %><br />
     <%= f.text_field :name, class: "form-control" %>
   </div>
 
@@ -53,7 +53,9 @@
   </div>
 <% end %>
 
-<h3>アカウント削除</h3>
+<hr>
+
+<h3>退会</h3>
 
 <div>
   不要になった場合はこちらから削除できます:
@@ -62,5 +64,7 @@
     method: :delete,
     class: "btn btn-danger" %>
 </div>
+
+<hr>
 
 <%= link_to "戻る", root_path, class: "btn btn-secondary" %>

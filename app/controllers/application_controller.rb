@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
     mypage_path
   end
 
+  def after_sign_out_path_for(resource_or_scope)
+    flash[:notice] = "退会しました"
+    new_user_registration_path
+  end
+
   protected
 
   def configure_permitted_parameters
