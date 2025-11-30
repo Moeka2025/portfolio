@@ -1,6 +1,7 @@
 class SpotsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_spot, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :authorize_user!, only: [:edit, :destroy, :update]
   
   def new
     @spot = Spot.new
@@ -43,7 +44,7 @@ class SpotsController < ApplicationController
   def destroy
     @spot = Spot.find(params[:id])
     @spot.destroy
-    redirect_to spots_path, notice: '削除しました'
+    redirect_to root_path, notice: '削除しました'
   end
 
 
@@ -58,8 +59,8 @@ class SpotsController < ApplicationController
   end
 
   def authorize_user!
-    unless @spot.user == current_user
-      redirect_to  spots_path, alert: "権限がありません"
-    end
+    redirect_to spots_path, alert: "権限がありません" if @spot.user != current_user
   end
+  
+
 end
