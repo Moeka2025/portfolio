@@ -10,12 +10,14 @@
       <%= image_tag 'いらすとや_no_image_jpg', size: "300x300" %>
     <% end %>
 
-  <% if spot.user == current_user %>
+    <p>
+      投稿者: <%= link_to spot.user.name, user_path(spot.user) %>
+    </p>
+
     <div class="spot-image">
       <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
     </div>
-  <% end %>
-
   </div>
   <hr> <!-- 投稿の間に線を入れる -->
 <% end %>
+

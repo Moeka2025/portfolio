@@ -1,0 +1,50 @@
+<h1>投稿されたもの</h1>
+
+  <div>
+    <%= image_tag @spot.image.variant(resize_to_limit: [300, 300]) if @spot.image.attached? %>
+    <p>タイトル: <%= @spot.title %></p>
+    <p>説明: <%= @spot.body %></p>
+    <%= @spot.created_at.strftime('%Y/%m/%d') %>
+  </div>
+
+  <br>
+
+  <% if @spot.user.avatar.attached? %>
+    <%= link_to user_path(@spot.user) do %>
+      <%= image_tag @spot.user.avatar.variant(resize: "100x100"), class: "rounded-circle mb-3" %>
+      <p><%= @spot.user.name %></p>
+    <% end %>
+  <% else %>
+    <%= link_to user_path(@spot.user) do %>
+      <%= image_tag "いらすとや_no_image.jpg", size: "100x100", class:"rounded-circle" %>
+      <p><%= @spot.user.name %></p>
+    <% end %>
+  <% end %>
+
+  <br>
+
+  <% if @spot.user == current_user %>
+    <%= link_to '編集', edit_spot_path(@spot), class: 'btn btn-primary' %>
+    <%= link_to '削除', spot_path(@spot), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+  <% end %>
+
+  <div>
+    <p>コメント件数:<%= @spot.post_comments.count %></p>
+    <% @spot.post_comments.each do |post_comment| %>
+      <%= image_tag post_comment.user.avatar.variant(resize_to_limit: [100, 100]) if post_comment.user.avatar.attached? %><br>
+      <%= post_comment.user.name %><br>
+      <%= post_comment.comment %><br>
+      <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+      <% if post_comment.user == current_user %>
+        <%= link_to "削除", spot_post_comment_path(post_comment.spot, post_comment), method: :delete %>
+      <% end %>
+      <hr>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form_with model: [@spot, @post_comment] do |f| %>
+      <%= f.text_area :comment, rows: '5', placeholder: "コメントを書いてください。" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+  </div>

@@ -21,6 +21,17 @@
     <% end %>
 
     <header>
+
+    <!-- 検索欄 -->
+    <% if user_signed_in? %>
+      <%= form_with url: spots_path, method: :get do |f| %>
+        <%= f.text_field :spot_name, placeholder: "名前を検索" %>
+        <%= f.select :model, options_for_select({"User" => "user", "Title" => "title"}) %>
+        <%= f.select :method, options_for_select({"完全一致" => "perfect", "後方一致" => "baclward", "部分一致" => "partial"}) %>
+        <%= f.submit "検索" %>
+      <% end %>
+    <% end %>
+
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <ul>
           <li>
@@ -35,6 +46,9 @@
             </li>
             <li>
               <%= link_to "投稿一覧", spots_path %>
+            </li>
+            <li>
+              <%= link_to "ユーザ一覧", users_path %>
             </li>
             <li>
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>

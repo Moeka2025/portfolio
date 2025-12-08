@@ -1,0 +1,15 @@
+<h1>ユーザーの一覧</h1>
+
+<% @users.each do |user| %>
+  <% if user.avatar.attached? %>
+    <%= link_to user_path(user) do %>
+      <%= image_tag user.avatar.variant(resize: "100x100"), class: "rounded-circle mb-3" %>
+      <p><%= user.name %></p>
+    <% end %>
+  <% else %>
+    <%= link_to user_path(user) do %>
+      <%= image_tag 'いらすとや_no_image.jpg', size: "100x100", class:"rounded-circle" %>
+      <p><%= user.name %></p>
+    <% end %>
+  <% end %>
+<% end %>

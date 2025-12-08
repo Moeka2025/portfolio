@@ -1,4 +1,4 @@
-class SpotsController < ApplicationController
+class Public::SpotsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_spot, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :destroy, :update]
@@ -21,10 +21,16 @@ class SpotsController < ApplicationController
 
   def index
     @spots = Spot.order(created_at: :desc)
+    if params[:spot_name].present? # 検索フォームで入力したタイトルをもとにデータを取得
+      @spots = Spot.where("title LIKE ?", "%#{params[:spot_name]}%")
+    else
+      @spots = Spot.order(created_at: :desc)
+    end
   end
 
   def show
     @spot = Spot.find(params[:id])
+    @post_comment = PostComment.new
   end
 
   def edit
