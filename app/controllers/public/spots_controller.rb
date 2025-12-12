@@ -21,6 +21,7 @@ class Public::SpotsController < ApplicationController
 
   def index
     @spots = Spot.order(created_at: :desc)
+    @spots = Spot.includes(:post_comments)
     if params[:spot_name].present? # 検索フォームで入力したタイトルをもとにデータを取得
       @spots = Spot.where("title LIKE ?", "%#{params[:spot_name]}%")
     else

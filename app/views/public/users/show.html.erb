@@ -1,25 +1,28 @@
-<h1><%= @user.name %> さんのプロフィール</h1>
+<div class="container">
+  <h1><%= @user.name %> さんのプロフィール</h1>
 
-<% if @user.avatar.attached? %>
-  <%= image_tag @user.avatar.variant(resize: "150x150"), class: "rounded-circle" %>
-<% else %>
-  <%= image_tag 'いらすとや_no_image.jpg', size: "150x150", class: "rounded-circle" %>
-<% end %>
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar.variant(resize: "100x100") %>
+  <% else %>
+    <%= image_tag 'いらすとや_no_image.jpg', size: "100x100" %>
+  <% end %>
 
-<hr>
+  <hr>
 
-<h1>My投稿一覧</h1>
-<% @spots.each do |spot| %>
-  <div class="spot-card">
-    <p><strong>タイトル:</strong> <%= spot.title %></p>
-    <p><strong>説明:</strong> <%= spot.body %></p>
-    <% if spot.image.attached? %>
-      <%= image_tag spot.image.variant(resize_to_limit: [300, 300]) %>
-    <% else %>
-      <%= image_tag 'いらすとや_no_image.jpg', size: "300x300" %>
-    <% end %>
-    <div class="spot-image">
-      <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
+  <h1>My投稿一覧</h1>
+  <% @spots.each do |spot| %>
+    <div class="row">
+      <% if spot.image.attached? %>
+        <%= image_tag spot.image.variant(resize_to_limit: [300, 300]) %>
+      <% else %>
+        <%= image_tag 'いらすとや_no_image.jpg', size: "300x300" %>
+      <% end %>
+    
+      <div class="col">
+        <h5>タイトル  【 <%= spot.title %> 】</h5>
+        <p><%= spot.body %></p>
+        <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

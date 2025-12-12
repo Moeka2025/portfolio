@@ -1,4 +1,7 @@
-<h1 class="text-center mb-4 border-bottom pb-2">投稿フォーム</h1>
+<div class="container">
+
+<h1>投稿フォーム</h1>
+<hr>
 
 <% if @spot.errors.any? %>
   <ul>
@@ -25,10 +28,9 @@
     <%= f.file_field :"image" %>
   </div>
 
- <hr>
-
   <div class="mb-3">
     <%= f.submit "投稿", class: "btn btn-primary" %>
   </div>
 
 <% end %>
+</div>

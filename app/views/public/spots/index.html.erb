@@ -1,23 +1,34 @@
-<h1>投稿一覧</h1>
+<div class="container">
 
-<% @spots.each do |spot| %>
-  <div class="spot-card">
-    <p><strong>タイトル:</strong> <%= spot.title %></p>
-    <p><strong>説明:</strong> <%= spot.body %></p>
-    <% if spot.image.attached? %>
-      <%= image_tag spot.image.variant(resize_to_limit: [300, 300]) if spot.image.attached? %>
-    <% else %>
-      <%= image_tag 'いらすとや_no_image_jpg', size: "300x300" %>
-    <% end %>
+  <h1>投稿一覧</h1>
+  <hr>
 
-    <p>
-      投稿者: <%= link_to spot.user.name, user_path(spot.user) %>
-    </p>
+  <% @spots.each do |spot| %>
+    <div class="row">
 
-    <div class="spot-image">
-      <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
-    </div>
-  </div>
-  <hr> <!-- 投稿の間に線を入れる -->
-<% end %>
+      <div class="col-md-4">
+        <% if spot.image.attached? %>
+          <%= image_tag spot.image.variant(resize_to_limit: [300, 300]) if spot.image.attached? %>
+        <% else %>
+          <%= image_tag 'いらすとや_no_image_jpg', size: "300x300" %>
+        <% end %>
+      </div>
 
+      <div class="col-md-8">
+        <h5><p>タイトル  【 <%= spot.title %> 】</p></h5>
+        <h5><p><%= spot.body %></p></h5>  <!-- 説明文 -->
+
+        <p>投稿者: <%= link_to spot.user.name, user_path(spot.user) %></p>
+
+        <div class="spot">
+          <p>コメント件数: <%= spot.post_comments.count %></p>
+        </div>
+
+          <div class="spot-image">
+            <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
+          </div>
+       </div>
+    </div> 
+    <hr>
+  <% end %>
+</div>

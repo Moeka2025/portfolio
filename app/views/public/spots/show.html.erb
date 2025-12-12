@@ -1,25 +1,27 @@
-<h1>投稿されたもの</h1>
+<div class="container">
+  <h1>投稿されたもの</h1>
+  <hr>
 
-  <div>
+  <div class="row">
     <%= image_tag @spot.image.variant(resize_to_limit: [300, 300]) if @spot.image.attached? %>
-    <p>タイトル: <%= @spot.title %></p>
-    <p>説明: <%= @spot.body %></p>
+    <div class="col">
+      <h5>タイトル  【 <%= @spot.title %> 】</h5>
+      <p><%= @spot.body %></p>  <!-- 説明文 -->
+
+    <% if @spot.user.avatar.attached? %>
+      <%= link_to user_path(@spot.user) do %>
+        <%= image_tag @spot.user.avatar.variant(resize: "80x80") %>
+        <p><%= @spot.user.name %></p>
+      <% end %>
+    <% else %>
+      <%= link_to user_path(@spot.user) do %>
+        <%= image_tag "いらすとや_no_image.jpg", size: "80x80" %>
+        <p><%= @spot.user.name %></p>
+      <% end %>
+    <% end %>
     <%= @spot.created_at.strftime('%Y/%m/%d') %>
+    </div>
   </div>
-
-  <br>
-
-  <% if @spot.user.avatar.attached? %>
-    <%= link_to user_path(@spot.user) do %>
-      <%= image_tag @spot.user.avatar.variant(resize: "100x100"), class: "rounded-circle mb-3" %>
-      <p><%= @spot.user.name %></p>
-    <% end %>
-  <% else %>
-    <%= link_to user_path(@spot.user) do %>
-      <%= image_tag "いらすとや_no_image.jpg", size: "100x100", class:"rounded-circle" %>
-      <p><%= @spot.user.name %></p>
-    <% end %>
-  <% end %>
 
   <br>
 
@@ -28,11 +30,13 @@
     <%= link_to '削除', spot_path(@spot), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
   <% end %>
 
+  <hr>
+
   <div>
-    <p>コメント件数:<%= @spot.post_comments.count %></p>
+    <h5>コメント件数 - <%= @spot.post_comments.count %> - </h5>
     <% @spot.post_comments.each do |post_comment| %>
-      <%= image_tag post_comment.user.avatar.variant(resize_to_limit: [100, 100]) if post_comment.user.avatar.attached? %><br>
-      <%= post_comment.user.name %><br>
+      <%= image_tag post_comment.user.avatar.variant(resize_to_limit: [80, 80]) if post_comment.user.avatar.attached? %><br>
+      <%= link_to post_comment.user.name, user_path(post_comment.user) %><br>
       <%= post_comment.comment %><br>
       <%= post_comment.created_at.strftime('%Y/%m/%d') %>
       <% if post_comment.user == current_user %>
@@ -48,3 +52,4 @@
       <%= f.submit "送信する" %>
     <% end %>
   </div>
+</div>
