@@ -1,6 +1,5 @@
 <div class="container">
   <h1><%= @user.name %> さんのプロフィール</h1>
-
   <% if @user.avatar.attached? %>
     <%= image_tag @user.avatar.variant(resize: "100x100") %>
   <% else %>
