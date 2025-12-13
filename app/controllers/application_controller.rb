@@ -8,14 +8,4 @@ class ApplicationController < ActionController::Base
     self.class.module_parent_name == 'Admin'
   end
 
-  protected
-
-  def configure_permitted_parameters
-    # 新規登録時
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :avatar])
-    # ログイン時
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:email])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :avatar])
-  end
-
 end
