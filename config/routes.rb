@@ -12,9 +12,7 @@ Rails.application.routes.draw do
 
   # ユーザー用　(public名前空間にまとめる)
   scope module: :public do
-    devise_for :users, controllers: {
-      registrations: 'users/registrations'
-    }
+    devise_for :users
 
     root to: 'users#mypage'
     get 'homes/about', to: 'homes#about', as: :about
