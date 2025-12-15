@@ -1,5 +1,5 @@
 class Public::SpotsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :show, :index, :edit, :update, :destroy]
   before_action :set_spot, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :destroy, :update]
   
