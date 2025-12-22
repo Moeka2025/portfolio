@@ -3,23 +3,26 @@
   <hr>
 
   <div class="row">
-    <%= image_tag @spot.image.variant(resize_to_limit: [300, 300]) if @spot.image.attached? %>
-    <div class="col">
-      <h5>タイトル  【 <%= @spot.title %> 】</h5>
-      <p><%= @spot.body %></p>  <!-- 説明文 -->
+    <div class="col-md-12">
 
-    <% if @spot.user.avatar.attached? %>
-      <%= link_to user_path(@spot.user) do %>
-        <%= image_tag @spot.user.avatar.variant(resize: "80x80") %>
-        <p><%= @spot.user.name %></p>
-      <% end %>
-    <% else %>
-      <%= link_to user_path(@spot.user) do %>
-        <%= image_tag "いらすとや_no_image.jpg", size: "80x80" %>
-        <p><%= @spot.user.name %></p>
-      <% end %>
-    <% end %>
-    <%= @spot.created_at.strftime('%Y/%m/%d') %>
+      <%= render "spot_info", spot: @spot %>
+
+      <div class="user-info">
+        <%= link_to user_path(@spot.user) do %>
+ 
+          <% if @spot.user.avatar.attached? %>
+            <%= image_tag @spot.user.avatar.variant(resize: "80x80") %>
+          <% else %>
+            <%= image_tag "いらすとや_no_image.jpg", size: "80x80" %>
+          <% end %>
+
+          <p><%= @spot.user.name %></p>
+        <% end %>
+
+        <%= render "static_star", spot: @spot %>
+
+        <p><%= @spot.created_at.strftime('%Y/%m/%d') %></p>
+      </div>
     </div>
   </div>
 

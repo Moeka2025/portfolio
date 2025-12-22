@@ -5,24 +5,16 @@
 
   <% @spots.each do |spot| %>
     <div class="row">
+      <div class="col-md-12">
 
-      <div class="col-md-4">
-        <% if spot.image.attached? %>
-          <%= image_tag spot.image.variant(resize_to_limit: [300, 300]) if spot.image.attached? %>
-        <% else %>
-          <%= image_tag 'いらすとや_no_image_jpg', size: "300x300" %>
-        <% end %>
-      </div>
-
-      <div class="col-md-8">
-        <h5><p>タイトル  【 <%= spot.title %> 】</p></h5>
-        <h5><p><%= spot.body %></p></h5>  <!-- 説明文 -->
-
+        <%= render "spot_info", spot: spot %>
         <p>投稿者: <%= link_to spot.user.name, user_path(spot.user) %></p>
 
         <div class="spot">
           <p>コメント件数: <%= spot.post_comments.count %></p>
         </div>
+
+          <%= render "static_star", spot: spot %>
 
           <div class="spot-image">
             <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>

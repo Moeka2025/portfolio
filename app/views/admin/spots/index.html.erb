@@ -1,0 +1,12 @@
+<h1>投稿一覧（管理者）</h1>
+
+<% @spots.each do |spot| %>
+  <div style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+    <p>タイトル  <%= spot.title %></p>
+    <p>投稿者  <%= spot.user.name %></p>
+
+    <%= link_to "削除", admin_spot_path(spot),
+        method: :delete,
+        data: { confirm: "本当に削除しますか？" } %>
+  </div>
+<% end %>

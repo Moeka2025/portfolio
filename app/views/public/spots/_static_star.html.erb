@@ -1,0 +1,20 @@
+<div id="spot_raty_<%= spot.id %>"></div>
+
+<script>
+  document.addEventListener("turbolinks:load", function() {
+    let elem = document.querySelector('#spot_raty_<%= spot.id %>');
+    if (!elem) return;
+
+    elem.innerHTML = ""; // ★ destroy の代わり
+
+    let opt = {
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      starHalf: "<%= asset_path('star-half.png') %>",
+      readOnly: true,
+      score: <%= spot.star %>
+    };
+
+    raty(elem, opt);
+  });
+</script>

@@ -14,20 +14,8 @@
   <% end %>
 
   <%= form_with model: @spot, local: true do |f| %>
-    <div class="form-group">
-      <%= f.label :shop_name, "タイトル" %><br>
-      <%= f.text_field :title %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :body, "説明" %><br>
-      <%= f.text_area :body %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :image, "画像" %><br>
-      <%= f.file_field :image %>
-    </div>
+  <%= render "form_fields", f: f %>
+  <%= render "form_star" %>
 
     <%= f.submit "更新", class: "btn btn-primary" %>
     <%= link_to '削除', spot_path(@spot), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>

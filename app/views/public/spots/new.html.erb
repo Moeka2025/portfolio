@@ -12,21 +12,8 @@
 <% end %>
 
 <%= form_with model: @spot do |f| %>
-
-  <div class="form-group">
-    <%= f.label :title, "タイトル" %><br>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :body, "本文" %><br>
-    <%= f.text_area :body %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :image, "画像" %><br>
-    <%= f.file_field :"image" %>
-  </div>
+  <%= render "form_fields", f: f %>
+  <%= render "form_star" %>
 
   <div class="mb-3">
     <%= f.submit "投稿", class: "btn btn-primary" %>

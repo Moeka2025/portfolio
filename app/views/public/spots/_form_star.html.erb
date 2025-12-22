@@ -1,0 +1,20 @@
+<!-- starについての記述 -->
+
+<div id="spot_raty"></div>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    let elem = document.querySelector('#spot_raty');
+    if (!elem) return;
+
+    elem.innerHTML = ""
+    
+    let opt = {
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      scoreName: 'spot[star]',
+      score: <%= @spot.star || 0 %>
+    };
+    raty(elem, opt);
+  });
+</script>
