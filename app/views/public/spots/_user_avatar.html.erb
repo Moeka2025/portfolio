@@ -1,0 +1,10 @@
+<p class="user-avatar">
+  <%= link_to user_path(spot.user) do %>
+    <% if spot.user.avatar.attached? %>
+      <%= image_tag spot.user.avatar.variant(resize_to_fill: [80, 80]), class: "user-icon" %>
+    <% else %>
+      <i class="fa-solid fa-user user-icon-default"></i>
+    <% end %>
+    <span><%= spot.user.name %></span>
+  <% end %>
+</p>

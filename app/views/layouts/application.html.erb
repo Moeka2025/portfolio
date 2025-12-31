@@ -7,12 +7,16 @@
     <%= csp_meta_tag %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <div class="container text-center my-4">
-      <h1 class="site-title">Spot Review</h1>
-    </div>
+  
+    <header class="site-header">
+      <div class="container text-center py-5">
+        <h1><%= link_to "Spot Review", root_path %></h1>
+      </div>
+    </header>
 
     <hr>
 
@@ -24,19 +28,26 @@
       <div class="alert"><%= flash[:alert] %></div>
     <% end %>
 
-
-    <header class="container">
-      <nav class="navbar navbar-light container-fluid">
+      <nav class="navbar navbar-light container mt-3 mb-3">
 
         <!-- 検索欄 -->
         <% if user_signed_in? %>
-          <%= form_with url: spots_path, method: :get do |f| %>
-            <%= f.text_field :spot_name, placeholder: "名前を検索" %>
-            <%= f.submit "検索" %><br>
-            <%= f.select :model, options_for_select({"User" => "user", "Title" => "title"}) %>
-            <%= f.select :method, options_for_select({"完全一致" => "perfect", "後方一致" => "baclward", "部分一致" => "partial"}) %><br>
+          <%= form_with url: spots_path, method: :get, local: true do |f| %>
+            <%= f.text_field :spot_name, placeholder: "タイトル・ユーザーを検索", value: params[:spot_name], style: "width: 250px;" %>
+            <%= f.text_field :tag_name, placeholder: "タグ検索", value: params[:tag_name] %>
+          <%= f.submit "検索" %><br>
+            <%= f.select :model, options_for_select({"User" => "user", "Title" => "title"}, params[:model]) %>
+            <%= f.select :method, options_for_select({"完全一致" => "perfect", "後方一致" => "backward", "部分一致" => "partial"}, params[:method]) %><br>
           <% end %>
         <% end %>
+
+        <!-- 新規登録、ログイン -->
+        <div class="auth-buttons ms-3 d-none d-sm-flex">
+          <% unless user_signed_in? %>
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary btn-sm mr-3" %>
+            <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-success btn-sm" %>
+          <% end %>
+        </div>
 
         <!-- ハンバーガー -->
         <button class="navbar-toggler ms-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,13 +65,40 @@
               <li class="nav-item"><%= link_to "ユーザ一覧", users_path %></li>
              <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             <% else %>
-              <li><%= link_to "新規登録", new_user_registration_path %></li>
+              <li class="nav-item"><%= link_to "新規登録", new_user_registration_path %></li>
               <li class="nav-item"><%= link_to "ログイン", new_user_session_path %></li>
+              <li class="nav-item"><%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post %>
             <% end %>
           </ul>
         </div>
       </nav>
-    </header>
-    <%= yield %>
+
+      <main class="flex-grow-1 mb-5">
+        <%= yield %>
+      </main>
+
+    <footer>
+      <div class="social">
+        <a href="https://facebook.com" target="_blank">
+          <i class="fab fa-facebook-square"></i>
+        </a>
+
+        <a href="https://twitter.com" target="_blank">
+          <i class="fab fa-twitter-square"></i>
+        </a>
+       
+        <a href="https://instagram.com" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      <p class="footer-text">© 2025 SpotReview. All Rights Reserved.</p>
+      <div>
+        <%= button_to "退会する", user_registration_path,
+          data: { confirm: "本当に削除しますか？" },
+          method: :delete,
+          class: "btn btn-danger" %>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
   </body>
 </html>

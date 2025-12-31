@@ -1,0 +1,14 @@
+<div class="comment">
+  <i class="fa-solid fa-comment"></i>
+  <%= spot.post_comments.count %>
+</div>
+
+<div class="tag">
+  <i class="fa-solid fa-tag"></i>
+  <% spot.tags.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag), class: "tag" %>
+  <% end %>
+</div>
+
+<%= render "public/spots/static_star", spot: spot %>
+

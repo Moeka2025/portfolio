@@ -1,0 +1,28 @@
+<% @spots.each do |spot| %>
+  <div class="row">
+    <div class="col-4">
+     <%= link_to spot_path(spot) do %>
+        <% if spot.image.attached? %>
+          <%= image_tag spot.image.variant(resize_to_limit: [300, 300]),class: "spot-image" %>
+        <% else %>
+          <%= image_tag 'いらすとや_no_image_jpg', size: "300x300" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="col-8">
+      <h4 class="highlight-title mb-3">【 <%= spot.title %> 】</h4>
+        <p class="body-collapse" id="body-<%= spot.id %>">
+          <%= spot.body %>
+        </p>
+        <% if spot.body.present? && spot.body.length > 100 %>
+          <button class="btn btn-link mb-3" onclick="toggleBody(event, <%= spot.id %>)">
+            続きを読む
+          </button>
+        <% end %>
+      <br>
+      <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
+    </div>
+  </div>
+  <hr>
+<% end %>

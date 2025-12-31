@@ -1,6 +1,23 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
+  before_action :ensure_guest_user, only: [:edit, :mypage, :show]
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.email == "guest@example.com"
+      redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
+  end
+
+  protected
+  def configure_permitted_parameters
+    # 新規登録時
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar, :introduction])
+  end
+end
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -59,10 +76,3 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
-  protected
-  def configure_permitted_parameters
-    # 新規登録時
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :avatar])
-  end
-end

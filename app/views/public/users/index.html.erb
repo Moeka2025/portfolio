@@ -1,18 +1,26 @@
 <div class="container">
-<h1>ユーザーの一覧</h1>
-<hr>
-
-<% @users.each do |user| %>
-  <% if user.avatar.attached? %>
-    <%= link_to user_path(user) do %>
-      <%= image_tag user.avatar.variant(resize: "100x100"), class: "rounded-circle mb-3" %>
-      <p><%= user.name %></p>
-    <% end %>
-  <% else %>
-    <%= link_to user_path(user) do %>
-      <%= image_tag 'いらすとや_no_image.jpg', size: "100x100", class:"rounded-circle" %>
-      <p><%= user.name %></p>
-    <% end %>
-  <% end %>
+  <h1>ユーザーの一覧</h1>
   <hr>
-<% end %>
+
+  <% @users.each do |user| %>
+    <div class="row mb-4">
+      <div class="col-3">
+        <%= link_to user_path(user) do %>
+          <% if user.avatar.attached? %>
+            <%= image_tag user.avatar.variant(resize: "150x150"), class: "rounded-circle mb-3" %>
+          <% else %>
+            <%= image_tag 'いらすとや_no_image.jpg', size: "150x150", class:"rounded-circle" %>
+          <% end %>
+        <p><%= user.name %></p>
+      <% end %>
+    </div>
+
+    <div class="col-9">
+      <div class="introduction-box">
+        <h5>自己紹介</h5>
+        <p><%= simple_format(user.introduction) %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -1,20 +1,20 @@
 <div class="container">
-  <h1>投稿されたもの</h1>
+  <h1>投稿詳細</h1>
   <hr>
 
   <div class="row">
     <div class="col-md-12">
 
       <%= render "spot_info", spot: @spot %>
+      <p><%= @spot.body %></p>
+ 
+      <%= render "address", spot: @spot, context: :show %>
+      <%= render "spot_meta", spot: @spot %>
 
       <div class="user-info">
         <%= link_to user_path(@spot.user) do %>
  
-          <% if @spot.user.avatar.attached? %>
-            <%= image_tag @spot.user.avatar.variant(resize: "80x80") %>
-          <% else %>
-            <%= image_tag "いらすとや_no_image.jpg", size: "80x80" %>
-          <% end %>
+        <%= render "user_avatar", spot: @spot %>
 
           <p><%= @spot.user.name %></p>
         <% end %>
@@ -26,25 +26,69 @@
     </div>
   </div>
 
-  <br>
+  <div class="my-4">
+    <% if @spot.user == current_user %>
+      <%= link_to '編集', edit_spot_path(@spot), class: 'btn btn-primary' %>
+      <%= link_to '削除', spot_path(@spot), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    <% end %>
+  </div>
 
-  <% if @spot.user == current_user %>
-    <%= link_to '編集', edit_spot_path(@spot), class: 'btn btn-primary' %>
-    <%= link_to '削除', spot_path(@spot), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-  <% end %>
+  <!-- 地図表示 -->
+  <div id="map"
+  data-lat="<%= @spot.latitude %>"
+  data-lng="<%= @spot.longitude %>"
+  data-title="<%= j @spot.title %>"
+  data-address="<%= j @spot.address %>"
+  data-body="<%= j @spot.body %>"
+  data-image="<%= url_for(@spot.image) %>"
+  style="width: 100%; height: 400px;">
+</div>
+
+<!-- Google Maps importLibrary ローダー（必須） -->
+<script>
+  (g => {
+    var h, a, k, p = "The Google Maps JavaScript API", c = "google",
+      l = "importLibrary", q = "__ib__", m = document, b = window;
+    b = b[c] || (b[c] = {});
+    var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams,
+      u = () => h || (h = new Promise(async (f, n) => {
+        await (a = m.createElement("script"));
+        e.set("libraries", [...r] + "");
+        for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+        e.set("callback", c + ".maps." + q);
+        a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+        d[q] = f;
+        a.onerror = () => h = n(Error(p + " could not load."));
+        a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+        m.head.append(a);
+      }));
+    d[l] ? console.warn(p + " only loads once. Ignoring:", g) :
+      d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n));
+  })({
+    key: "AIzaSyDEnkzJxwPw7ir31B2WlzTv33mj-YFGe2k",
+  });
+</script>
+
+<%= javascript_pack_tag 'map' %>
+
 
   <hr>
 
   <div>
-    <h5>コメント件数 - <%= @spot.post_comments.count %> - </h5>
+    <h4>コメント件数 - <%= @spot.post_comments.count %> - </h4>
     <% @spot.post_comments.each do |post_comment| %>
-      <%= image_tag post_comment.user.avatar.variant(resize_to_limit: [80, 80]) if post_comment.user.avatar.attached? %><br>
-      <%= link_to post_comment.user.name, user_path(post_comment.user) %><br>
-      <%= post_comment.comment %><br>
-      <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-      <% if post_comment.user == current_user %>
-        <%= link_to "削除", spot_post_comment_path(post_comment.spot, post_comment), method: :delete %>
-      <% end %>
+      <%= render "user_avatar", spot: @spot %>
+        <div class="comment-box">
+          <%= post_comment.comment %><br>
+        </div>
+
+        <div class="comment-date">
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+        </div>
+
+        <% if post_comment.user == current_user %>
+          <%= link_to "削除", spot_post_comment_path(post_comment.spot, post_comment), method: :delete %>
+        <% end %>
       <hr>
     <% end %>
   </div>

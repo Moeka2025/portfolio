@@ -1,1 +1,175 @@
-@use '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
+
+.site-header {
+  height: 200px;
+  background:
+    linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)),
+    url('../images/header.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.site-header h1 {
+  font-size: 4rem;
+  margin: 0;
+  text-shadow:
+    1px 0 0 #000,
+    0 1px 0 #000,
+    -1px 0 0 #000,
+    0 -1px 0 #000,
+    3px 3px 0 #000;
+}
+
+.site-header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+header {
+ margin-bottom: 20px;
+}
+
+#map {
+  width: 100%;
+  height: calc(100vh - 88px - 179px);
+}
+
+.highlight-title {
+  display: inline-block;
+  background: linear-gradient(transparent 60%, #EFE8DD 60%);
+  padding: 0 4px;
+}
+
+/* ハンバーガーメニュー内 */
+.navbar-collapse {
+position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  width: 200px; /* メニューの幅 */
+  background: white;
+  z-index: 1050;
+  box-shadow: -4px 4px 10px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+  text-align: right;
+  padding: 20px 25px;
+  border-bottom: 1px solid #eee;
+}
+
+.spot-image {
+  display: block;
+  margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+.body-collapse {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.user-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 6px;
+}
+
+.introduction-box {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.comment-box {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fafafa;
+  width: fit-content;
+  display: inline-block;
+}
+
+footer {
+  width: 100%;
+  margin-top: auto;
+  padding: 40px 0;
+  text-align: center;
+  background-color: #E6D5BA;
+  border-top: 1px solid #eee;
+}
+
+/* snsのアイコン */
+.social {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.social a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.social a:hover {
+  color: #ddd;
+}
+
+.social i {
+  margin: 0 10px;
+  font-size: 40px;
+  font-color: #fff;
+}
+
+.footer-text {
+  color: #fff;
+}
+
+/* アバウトページ */
+.about-page {
+  max-width: 850px;
+  background-color: #faf7f0;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.about-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.about-lead {
+  font-size: 18px;
+  color: #555;
+}
+
+.feature-box {
+  margin-top: 20px;
+}
+
+.feature-icon {
+  font-size: 40px;
+  color: #c8a97e;
+  margin-bottom: 10px;
+}
+
+.feature-title {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.feature-text {
+  font-size: 14px;
+  color: #666;
+}

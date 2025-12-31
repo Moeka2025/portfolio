@@ -1,4 +1,8 @@
+<div class="container">
+  <div class="info">
+
 <h2><%= resource_name.to_s.humanize %>さんの編集フォーム</h2>
+<hr>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -13,12 +17,19 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
+  <br>
+
   <div class="form-group">
     <%= f.label :avatar, "アイコン画像" %><br />
     <% if resource.avatar.attached? %>
-      <%= image_tag resource.avatar.variant(resize_to_limit: [100, 100]) %><br />
+      <%= image_tag resource.avatar.variant(resize_to_limit: [100, 100]) %><br/>
     <% end %>
-    <%= f.file_field :avatar, class: "form-control" %>
+     <%= f.file_field :avatar %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :introduction, "自己紹介" %><br>
+    <%= f.text_area :introduction, class: "form-control", rows: 5 %>
   </div>
 
   <hr>
@@ -68,3 +79,6 @@
 <hr>
 
 <%= link_to "戻る", root_path, class: "btn btn-secondary" %>
+
+</div>
+</div>

@@ -15,6 +15,7 @@
 
   <%= form_with model: @spot, local: true do |f| %>
   <%= render "form_fields", f: f %>
+  <%= render "address_form", f: f %>
   <%= render "form_star" %>
 
     <%= f.submit "更新", class: "btn btn-primary" %>

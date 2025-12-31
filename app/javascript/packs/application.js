@@ -11,7 +11,7 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application"; 
+import "../stylesheets/application.scss"; 
 
 Rails.start()
 Turbolinks.start()
@@ -23,3 +23,18 @@ window.raty = function(elem,opt) {
     raty.init();
     return raty;
 }
+
+window.toggleBody = function(event, id) {
+    const body = document.getElementById(`body-${id}`);
+    const btn = event.target;
+  
+    if (body.classList.contains("body-collapse")) {
+      body.classList.remove("body-collapse");
+      btn.textContent = "閉じる";
+    } else {
+      body.classList.add("body-collapse");
+      btn.textContent = "続きを読む";
+    }
+  }
+
+  require.context('../images', true)

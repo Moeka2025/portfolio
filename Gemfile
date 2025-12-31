@@ -58,6 +58,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 gem 'dotenv-rails'
+gem 'geocoder'
 
 group :production do
   gem 'mysql2', '~> 0.5'
@@ -66,3 +67,5 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+
+gem 'kaminari','~> 1.2.1'

@@ -1,26 +1,39 @@
 <div class="container">
 
   <h1>投稿一覧</h1>
+  <div class="sort-links">
+    <%= link_to "新しい順", spots_path(sort: "new", spot_name: params[:spot_name], tag_name:params[:tag_name]) %> |
+    <%= link_to "評価の高い順", spots_path(sort: "star", spot_name: params[:spot_name], tag_name: params[:tag_name]) %>
+  </div>
   <hr>
 
   <% @spots.each do |spot| %>
     <div class="row">
-      <div class="col-md-12">
-
+      <div class="col-md-6">
         <%= render "spot_info", spot: spot %>
-        <p>投稿者: <%= link_to spot.user.name, user_path(spot.user) %></p>
 
-        <div class="spot">
-          <p>コメント件数: <%= spot.post_comments.count %></p>
+        <div class="mt-3">
+          <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
         </div>
+      </div>
 
-          <%= render "static_star", spot: spot %>
+      <div class="col-md-6 d-flex flex-column justify-content-center">
+        <p class="body-collapse" id="body-<%= spot.id %>">
+          <%= spot.body %>
+        </p>
+        <% if spot.body.present? && spot.body.length > 100 %>
+          <button class="btn btn-link" onclick="toggleBody(event, <%= spot.id %>)">
+            続きを読む
+          </button>
+        <% end %>
 
-          <div class="spot-image">
-            <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
-          </div>
-       </div>
-    </div> 
+        <%= render "user_avatar", spot: spot %>
+        <%= render "address", spot: spot, context: :index %>
+        <%= render "spot_meta", spot: spot %>
+      </div>
+    </div>
+
     <hr>
   <% end %>
+  <%= paginate @spots %>
 </div>

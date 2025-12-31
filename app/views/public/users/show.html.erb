@@ -1,27 +1,9 @@
 <div class="container">
   <h1><%= @user.name %> さんのプロフィール</h1>
-  <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar.variant(resize: "100x100") %>
-  <% else %>
-    <%= image_tag 'いらすとや_no_image.jpg', size: "100x100" %>
-  <% end %>
-
+  <%= render "introduction", user: @user %>
   <hr>
 
-  <h1>My投稿一覧</h1>
-  <% @spots.each do |spot| %>
-    <div class="row">
-      <% if spot.image.attached? %>
-        <%= image_tag spot.image.variant(resize_to_limit: [300, 300]) %>
-      <% else %>
-        <%= image_tag 'いらすとや_no_image.jpg', size: "300x300" %>
-      <% end %>
-    
-      <div class="col">
-        <h5>タイトル  【 <%= spot.title %> 】</h5>
-        <p><%= spot.body %></p>
-        <%= link_to '詳細を見る', spot_path(spot), class: 'btn btn-info' %>
-      </div>
-    </div>
-  <% end %>
+  <h1><%= @user.name %>さんの投稿一覧</h1>
+  <hr>
+  <%= render "profile", user: @user %>
 </div>
