@@ -15,8 +15,6 @@
         <%= link_to user_path(@spot.user) do %>
  
         <%= render "user_avatar", spot: @spot %>
-
-          <p><%= @spot.user.name %></p>
         <% end %>
 
         <%= render "static_star", spot: @spot %>
