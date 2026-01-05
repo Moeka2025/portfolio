@@ -62,6 +62,37 @@ position: absolute;
   border-bottom: 1px solid #eee;
 }
 
+.breadcrumb {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: transparent !important;
+}
+
+.breadcrumb li {
+  display: inline;
+  list-style: none;
+}
+
+.breadcrumb li:after {
+  content: '>';
+  padding: 0 0 2em;
+  color: #555;
+}
+
+.breadcrumb li:last-chid:after {
+  content: '';
+}
+
+.breadcrumb li a {
+  text-decoration: none;
+  color: #52b5ee;
+}
+
+.breadcrumb li a:hover {
+  text-decoration: underline;
+}
+
 .spot-image {
   display: block;
   margin-bottom: 10px;

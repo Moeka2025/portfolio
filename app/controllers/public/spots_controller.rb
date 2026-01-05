@@ -25,6 +25,8 @@ class Public::SpotsController < ApplicationController
   def index
     @spots = Spot.includes(:post_comments)
 
+    @total_spots_count = @spots.count
+
     respond_to do |format|
       format.html do
         @spot = Spot.page(params[:page])

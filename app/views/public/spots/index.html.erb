@@ -1,6 +1,7 @@
 <div class="container">
 
   <h1>投稿一覧</h1>
+  <p>件数：<%= @total_spots_count %>件</p>
   <div class="sort-links">
     <%= link_to "新しい順", spots_path(sort: "new", spot_name: params[:spot_name], tag_name:params[:tag_name]) %> |
     <%= link_to "評価の高い順", spots_path(sort: "star", spot_name: params[:spot_name], tag_name: params[:tag_name]) %>

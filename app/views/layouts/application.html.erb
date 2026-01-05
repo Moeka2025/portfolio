@@ -73,6 +73,24 @@
         </div>
       </nav>
 
+      <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li itemprop="itemLisElement" itemscope
+            itemtype="ittps://schema.org/ListItem">
+          <a itemprop="item" href="<%= root_path %>">
+            <span itemprop="name">ホーム</span>
+          </a>
+          <meta itemprop="position" content="1" />
+        </li>
+
+        <li itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="<%= spots_path %>">
+            <span itemprop="name">投稿一覧</span>
+          </a>
+          <meta itemprop="position content="2" />
+        </li>
+      </ol>
+
       <main class="flex-grow-1 mb-5">
         <%= yield %>
       </main>
