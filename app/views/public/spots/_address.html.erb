@@ -1,11 +1,12 @@
-<% if local_assigns[:context] == :show %>
-<p class="card-title">
-  <%= link_to(spot_path(spot.id), class:"text-dark") do %>
-    <strong><i class="fa-solid fa-flag"></i></strong> <%= spot.zipcode %>
-  <% end %>
-</p>
-<% end %>
 
-<p class="card-title">
-  <span><i class="fa-solid fa-location-dot"></i><%= spot.address %></span>
-</p>
+  <% if spot.zipcode.present? %>
+    <p class="card-title">
+      <strong><i class="fa-solid fa-flag"></i></strong> 〒<%= spot.zipcode %>
+    </p>
+  <% end %>
+
+  <p class="card-title">
+    <%= link_to "https://www.google.com/maps/search/?api=1&query=#{spot.address}", target: "_blank", class: "text-dark" do %>
+      <span><i class="fa-solid fa-location-dot"></i><%= spot.address %></span>
+    <% end %>
+  </p>

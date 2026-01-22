@@ -39,3 +39,14 @@ async function initMap() {
   }
 
 initMap();
+
+$(document).on('turbolinks:load', function(){
+  if($('#spot_zipcode').lingth) {
+    $('#spot_zipcode').jpostal( {
+      postcode : [ '#spot_zipcode' ],
+      address  : {
+        '#spot_address' : '%3%4%5'
+      }
+    });
+  }
+});

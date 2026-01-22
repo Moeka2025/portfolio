@@ -79,8 +79,6 @@ class Public::SpotsController < ApplicationController
 
   def update
     @spot = Spot.find(params[:id])
-    @spot.attributes = spot_params
-    @spot.zipcode = params[:zipcode]
     tag_list = params[:spot][:tag_name].split(/[[:blank:]]/)
 
     if @spot.update(spot_params)
@@ -102,7 +100,7 @@ class Public::SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:title, :body, :image, :star, :address)
+    params.require(:spot).permit(:title, :body, :image, :star, :zipcode, :address)
   end
 
   def set_spot
