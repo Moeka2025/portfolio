@@ -2,11 +2,15 @@
   <h1><%= @user.name %>さんのマイページ</h1>
  <hr>
 
-  <%= render "introduction", user: @user do %>
-    <% unless @user.guest_user? %>
-      <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-warning mt-3" %>
-    <% end %>
+ <%= render "introduction", user: @user do %>
+  <% if @user.guest_user? %>
+    <div class="alert alert-info mt-3">
+      現在はゲストとして閲覧中です。ログインすると、プロフィールの編集ができるようになります。
+    </div>
+  <% else %>
+    <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-warning mt-3" %>
   <% end %>
+<% end %>
 
   <hr>
   <br>
@@ -20,7 +24,7 @@
           <% if spot.image.attached? %>
             <%= image_tag spot.image.variant(resize_to_limit: [300, 300]),class: "spot-image" %>
           <% else %>
-            <%= image_tag 'いらすとや_no_image_jpg', size: "300x300" %>
+            <%= image_tag 'いらすとや_no_image.jpg', size: "300x300" %>
           <% end %>
         <% end %>
       </div>

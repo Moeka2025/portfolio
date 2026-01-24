@@ -1,12 +1,7 @@
-
+<p class="card-text mb-2">
+  <i class="fa-solid fa-location-dot text-danger"></i>
   <% if spot.zipcode.present? %>
-    <p class="card-title">
-      <strong><i class="fa-solid fa-flag"></i></strong> 〒<%= spot.zipcode %>
-    </p>
+    <span class="ms-1">〒<%= spot.zipcode %></span>
   <% end %>
-
-  <p class="card-title">
-    <%= link_to "https://www.google.com/maps/search/?api=1&query=#{spot.address}", target: "_blank", class: "text-dark" do %>
-      <span><i class="fa-solid fa-location-dot"></i><%= spot.address %></span>
-    <% end %>
-  </p>
+  <span class="ms-1"><%= spot.address %></span>
+</p>

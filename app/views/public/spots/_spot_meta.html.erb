@@ -3,12 +3,11 @@
   <%= spot.post_comments.count %>
 </div>
 
-<div class="tag">
+<div class="tags">
   <i class="fa-solid fa-tag"></i>
   <% spot.tags.each do |tag| %>
-    <%= link_to tag.name, tag_path(tag), class: "tag" %>
+    <%= link_to tag.name, tag_path(tag), class: "tag-pill" %>
   <% end %>
 </div>
 
 <%= render "public/spots/static_star", spot: spot %>
-

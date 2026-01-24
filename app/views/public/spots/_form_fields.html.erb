@@ -1,16 +1,16 @@
 <div class="form-group">
-  <%= f.label :title, "タイトル" %><br>
-  <%= f.text_field :title %>
+  <%= f.label :title, "タイトル", class: "form-label fw-bold" %><br>
+  <%= f.text_field :title, class: "form-control form-control-lg", placeholder: "スポット名を入力してください" %>
 </div>
 
 <div class="form-group">
-  <%= f.label :body, "本文" %><br>
-  <%= f.text_area :body %>
+  <%= f.label :body, "本文", class: "form-label fw-bold" %><br>
+  <%= f.text_area :body, class: "form-control", placeholder: "説明を記入してください" %>
 </div>
 
 <div class="form-group">
-  <%= f.label :tag_name, "タグ(スペース区切り)" %><br>
-  <%= f.text_field :tag_name, value: @tag_list %>
+  <%= f.label :tag_name, "タグ(スペース区切り)", class: "form-label fw-bold" %><br>
+  <%= f.text_field :tag_name, value: @tag_list, class: "form-control", placeholder: "例) 居酒屋 路地裏 静か" %>
 </div>
 
 <div class="form-group">

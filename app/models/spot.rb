@@ -11,7 +11,15 @@ class Spot < ApplicationRecord
 
   validates :address, presence: true
 
-  geocoded_by :address
+  geocoded_by :address do |obj, results|
+    if result = results.first
+      obj.latitude = result.latitude
+      obj.longitude = result.longitude
+      if zip_data = result.address_components.find { |c| c['types'].include?('postal_code') }
+        obj.zipcode = zip_data['long_name']
+      end
+    end
+  end
   after_validation :geocode, if: :address_changed?
 
   def get_image

@@ -25,12 +25,6 @@ class Public::SpotsController < ApplicationController
   def index
     @spots = Spot.includes(:post_comments)
 
-    @total_spots_count = @spots.count
-
-    respond_to do |format|
-      format.html do
-        @spot = Spot.page(params[:page])
-    
         # タイトル検索
         if params[:spot_name].present?
           @spots = @spots.where("title LIKE ?", "%#{params[:spot_name]}%")
@@ -47,6 +41,8 @@ class Public::SpotsController < ApplicationController
           @spots = tag.present? ? tag.spots : Spot.none
         end
 
+        @total_spots_count = @spots.count
+
         # 並び替え
         case params[:sort]
         when "new"
@@ -61,11 +57,16 @@ class Public::SpotsController < ApplicationController
         @spots = @spots.page(params[:page]).per(5)
       end
 
+      respond_to do |format|
+        format.html do
+          @spot = Spot.page(params[:page])
+
       format.json do
         @spots = Spot.all
       end
     end
   end
+
 
   def show
     @spot = Spot.find(params[:id])
@@ -100,7 +101,7 @@ class Public::SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:title, :body, :image, :star, :zipcode, :address)
+    params.require(:spot).permit(:title, :body, :star, :zipcode, :address, :image)
   end
 
   def set_spot

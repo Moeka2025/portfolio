@@ -7,7 +7,7 @@
     <% if spot.image.attached? %>
       <%= image_tag spot.image.variant(resize_to_limit: [500, 500]),class: "spot-image" %>
     <% else %>
-      <%= image_tag 'いらすとや_no_image_jpg', size: "500x500" %>
+      <%= image_tag 'いらすとや_no_image.jpg', size: "500x500" %>
     <% end %>
   <% end %>
 </div>
