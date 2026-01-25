@@ -32,10 +32,11 @@
 
         <!-- 検索欄 -->
         <% if user_signed_in? %>
-          <%= form_with url: spots_path, method: :get, local: true do |f| %>
+          <%= form_with url: (params[:model] == "user" ? users_path : spots_path), method: :get, local: true do |f| %>
             <%= f.text_field :spot_name, placeholder: "タイトル・ユーザーを検索", value: params[:spot_name], style: "width: 250px;" %>
             <%= f.text_field :tag_name, placeholder: "タグ検索", value: params[:tag_name] %>
-          <%= f.submit "検索" %><br>
+            <%= f.submit "検索" %><br>
+
             <%= f.select :model, options_for_select({"User" => "user", "Title" => "title"}, params[:model]) %>
             <%= f.select :method, options_for_select({"完全一致" => "perfect", "後方一致" => "backward", "部分一致" => "partial"}, params[:method]) %><br>
           <% end %>
@@ -56,7 +57,7 @@
   
           <div class="dropdown-menu dropdown-menu-right custom-dropdown-menu shadow border-0" aria-labelledby="userMenu">
             <div class="dropdown-arrow"></div> <% if user_signed_in? %>
-              <%= link_to user_path(current_user), class: "dropdown-item" do %>
+              <%= link_to root_path, class: "dropdown-item" do %>
                 <i class="fas fa-user-circle"></i> Myページ
               <% end %>
               <%= link_to new_spot_path, class: "dropdown-item" do %>
@@ -122,5 +123,12 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.jpostal@0.1.8/jquery.jpostal.js"></script>
+    <script>
+    document.addEventListener("submit", function(e) {
+      const form = e.target;
+      const model = form.querySelector("[name='model']").value;
+      form.action = model === "user" ? "/users" : "/spots";
+    });
+    </script>
   </body>
 </html>

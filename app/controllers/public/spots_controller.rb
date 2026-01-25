@@ -24,6 +24,7 @@ class Public::SpotsController < ApplicationController
 
   def index
     @spots = Spot.includes(:post_comments)
+    @users = User.all
 
         # タイトル検索
         if params[:spot_name].present?
@@ -32,7 +33,8 @@ class Public::SpotsController < ApplicationController
 
         # ユーザー検索
         if params[:model] == "user"
-          redirect_to users_path(name: params[:spot_name], method: params[:method]) and return
+          # params[:name] ではなく params[:spot_name] を見る
+          @users = User.where("name LIKE ?", "%#{params[:spot_name]}%")
         end
 
         # タグ検索
