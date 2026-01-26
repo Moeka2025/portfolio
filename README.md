@@ -16,9 +16,27 @@
 ### 主な利用シーン
 * 通りかかったときに見つけたお店を記録・共有したいとき
 * 投稿されたお店の情報を検索・共感したり、コメントを送って反応したいとき
+
+## 機能一覧
+* 投稿機能
+* コメント機能
+* 郵便番号自動入力
+* マップ表示
+* 検索機能
+* タグ機能
+* ゲストログイン機能
 ​
 ## 設計書
-後ほど作成予定
+* ER図
+  https://drive.google.com/file/d/1rxbVdZSHcNoqabLi_XJXMkYZPekcWmWE/view?usp=sharing
+* テーブル定義書
+  https://docs.google.com/spreadsheets/d/1u8ZjazhfQ7DYr9fegrY50EgrA9nhTUV-56ROdgl4uCA/edit?usp=sharing
+* アプリケーション詳細設計書
+https://docs.google.com/spreadsheets/d/1sAkBgZilbjkc18SMi34TMHXTDMrTaaWzIsXSj6LKEqk/edit?usp=sharing
+* AWS構成図
+  https://drive.google.com/file/d/1cA_6NLY_RVM2pLBu_pwvcWfvry2qVbF6/view?usp=sharing
+* インフラ設計書
+https://docs.google.com/spreadsheets/d/1ozStTjSFMBU5Rgpvz8B5qSfze9ci3aA35YF7mCnLMhc/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(Ubuntu 24.04)
@@ -29,4 +47,5 @@
 ​
 ## 使用素材
 - Font Awesome
+- いらすとや
 - ぱくたそ
